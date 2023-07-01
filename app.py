@@ -6,36 +6,15 @@ openai.api_key = st.secrets.OpenAIAPI.openai_api_key
 
 system_prompt = """
 このスレッドでは以下ルールを厳格に守ってください。
-あなたは文章を単語に分類してタグをつけるシステムです。
-以下のルールを厳格に守ってください。
-・文章の単語をそれぞれ以下のいずれかの「タグ」に分類してください
-　・Country
-　・Prefecture
-　・City
-　・Country sub division
-　・Street number
-　・Street name
+あなたはレストランの評判情報から以下の５点を整理して回答するシステムです。
+・レストランの概要
+・レストランの雰囲気
+・人気メニュー
+・接客態度
+・ペット店内可否
 
-・タグは上記の順番で回答してください。
-・入力の「,」は回答不要です。
-・全ての単語を「タグ名：単語」のフォーマットで回答してください。
+レストランの評判情報は複数の人が記載したものを「,」でつないで入力します。
 
-・入力が「Toyosu Building , 3-3-3 Toyosu, Koto-ku, Tokyo, Japan」の場合は、以下の通り回答してください。
-　Country:Japan
-　Prefecture:Tokyo
-　Country sub division:Koto-ku
-　Country sub division:Toyosu
-　Street number:3-3-3
-　Street name:Toyosu Building
-
-・入力が「Aichi kencho, 3-1-2 Sannomaru, Naka-ku, Nagoya, Aichi, Japan」の場合は、以下の通り回答してください。
-　Country:Japan
-　Prefecture:Aichi
-　City:Nagoya
-　Country sub division:Naka-ku
-　Country sub division:Sannomaru
-　Street number:3-1-2
-　Street name:Aich kencho
 """
 
 
@@ -64,12 +43,12 @@ def communicate():
 
 
 # ユーザーインターフェイスの構築
-st.title("フォーマット変換します")
+st.title("レストランの口コミを要約します。")
 #st.image("bom_v2.1.png")
-st.write("変換前の住所を設定してください。")
-st.write("例：Toyosu Building, 3-3-3 Toyosu, Koto-ku, Tokyo, Japan")
+st.write("レストランの口コミを入力してください")
+# st.write("例：Toyosu Building, 3-3-3 Toyosu, Koto-ku, Tokyo, Japan")
 
-user_input = st.text_input("変換前の住所", key="user_input", on_change=communicate)
+user_input = st.text_input("レストランの口コミ", key="user_input", on_change=communicate)
 
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
