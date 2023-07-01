@@ -71,7 +71,8 @@ if st.button("要約開始"):
             {"role": "system", "content": system_prompt_added}
             ]
     
-    st.session_state["user_input"] = review_input  # 追加する行
+    #st.session_state["user_input"] = review_input  # 追加する行
+    st.session_state["user_input"] = st.text_area("レストランの口コミ", key="user_input")  # ここに移動
     
     communicate()
 
