@@ -63,7 +63,7 @@ if "user_input" not in st.session_state:
     st.session_state["user_input"] = ""
     
 # ユーザーからの口コミ入力
-review_input = st.text_area("レストランの口コミ", key="user_input")
+review_input = st.text_area("レストランの口コミ", key="review_input")
     
 if st.button("要約開始"):
     # 追加観点のプロンプトに追加
