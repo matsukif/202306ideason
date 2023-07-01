@@ -55,15 +55,13 @@ aspect_input = st.text_input("要約の観点を指定してください（例�
 st.session_state["user_input"] = f"{review_input}\n{aspect_input}"
 
 if st.button("Submit"):
-    
-"IndentationError: expected an indented block"というエラーは、Pythonのインデント（スペースやタブによる字下げ）が正しくない場合に発生します。Pythonではインデントがコードのブロック（ループや関数、条件文など）を定義するため、正しいインデントが非常に重要です。
-
-このエラーは、おそらくif st.button("Submit"):の行の後に来るべきブロック（インデントされたコード行）が存在しないことを示しています。
-
-以下のように修正してみてください：
-
-python
-Copy code
-if st.button("Submit"):
     communicate()
-   
+
+if st.session_state["messages"]:
+    for message in reversed(st.session_state["messages"]):  # 直近のメッセージを上に
+        speaker = "＜口コミ情報＞"
+        if message["role"]=="assistant":
+            speaker="＜要約結果＞"
+
+        st.write(speaker)
+        st.write(message["content"])
