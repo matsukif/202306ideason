@@ -11,7 +11,6 @@ system_prompt = """
 ・レストランの雰囲気
 ・人気メニュー
 ・接客態度
-・ペット店内可否
 """
 
 
@@ -31,8 +30,8 @@ def communicate():
         messages=st.session_state["messages"]
     )  
 
-    bot_message = {"role": "assistant", "content": response["choices"][0]["message"]["content"]}
-    st.session_state["messages"].append(bot_message)
+    bot_message = response["choices"][0]["message"]
+    messages.append(bot_message)
 
     st.session_state["user_input"] = ""  # 入力欄を消去
 
@@ -61,10 +60,13 @@ if st.button("Submit"):
     communicate()
 
 if st.session_state["messages"]:
-    for message in reversed(st.session_state["messages"]):  # 直近のメッセージを上に
+    messages = st.session_state["messages"]
+
+    for message in reversed(messages[1:]):  # 直近のメッセージを上に
         speaker = "＜口コミ情報＞"
         if message["role"]=="assistant":
             speaker="＜要約結果＞"
 
+        # st.write(speaker + ": " + message["content"])
         st.write(speaker)
         st.write(message["content"])
