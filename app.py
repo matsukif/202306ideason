@@ -45,16 +45,14 @@ st.title("レストランの口コミを要約します")
 st.write("レストランの口コミを入力してください")
 st.write("概要、雰囲気、人気メニュー、接客態度、ペット店内可否の５つの観点で整理します")
 
-# ユーザーからの各観点の入力
-overview = st.text_input("レストランの概要", key="overview")
-atmosphere = st.text_input("レストランの雰囲気", key="atmosphere")
-popular_menu = st.text_input("人気メニュー", key="popular_menu")
-customer_service = st.text_input("接客態度", key="customer_service")
-pet_friendly = st.text_input("ペット店内可否", key="pet_friendly")
+# ユーザーからの口コミ入力
+review_input = st.text_area("レストランの口コミ", key="review_input")
 
-# 観点を結合して全体のユーザー入力を作成
-st.session_state["user_input"] = f"{overview}\n{atmosphere}\n{popular_menu}\n{customer_service}\n{pet_friendly}"
-communicate()
+# ユーザーからの観点指定入力
+aspect_input = st.text_input("要約の観点を指定してください（例：概要、雰囲気、人気メニュー、接客態度、ペット店内可否）", key="aspect_input")
 
-if st.session_state["messages"]:
-    messages = st.session_state
+# 口コミと観点を結合して全体のユーザー入力を作成
+st.session_state["user_input"] = f"{review_input}\n{aspect_input}"
+
+if st.button("Submit"):
+   
