@@ -50,6 +50,7 @@ def communicate():
 st.title("レストランの口コミを要約します。")
 #st.image("bom_v2.1.png")
 st.write("レストランの口コミを入力してください")
+st.write("概要、雰囲気、人気メニュー、接客態度、ペット店内可否の５つの観点で整理します")
 # st.write("例：Toyosu Building, 3-3-3 Toyosu, Koto-ku, Tokyo, Japan")
 
 user_input = st.text_input("レストランの口コミ", key="user_input", on_change=communicate)
