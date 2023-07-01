@@ -70,7 +70,7 @@ if aspect_input != "":
         {"role": "system", "content": system_prompt_added}
         ]
     
-if st.button("Submit"):
+if st.button("要約開始"):
     communicate()
 
 if st.session_state["messages"]:
