@@ -23,6 +23,10 @@ if "messages" not in st.session_state:
 # チャットボットとやりとりする関数
 def communicate():
 
+    st.session_state["messages"] = [
+        {"role": "system", "content": system_prompt}
+        ]
+    
     messages = st.session_state["messages"]
     
     user_message = {"role": "user", "content": st.session_state["user_input"]}
