@@ -28,9 +28,9 @@ if "messages" not in st.session_state:
 def communicate():
 #    messages = st.session_state["messages"]
     
-    # st.session_state["messages"] = [
-    #   {"role": "system", "content": system_prompt}
-    #   ]
+    st.session_state["messages"] = [
+      {"role": "system", "content": system_prompt}
+      ]
     
     user_message = {"role": "user", "content": st.session_state["user_input"]}
     st.session_state["messages"].append(user_message)
