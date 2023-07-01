@@ -21,6 +21,21 @@ if "messages" not in st.session_state:
         ]
 
 # チャットボットとやりとりする関数
+# def communicate():
+#     user_message = {"role": "user", "content": st.session_state["user_input"]}
+#     st.session_state["messages"].append(user_message)
+
+#     response = openai.ChatCompletion.create(
+#         model="gpt-3.5-turbo",
+#         messages=st.session_state["messages"]
+#     )  
+
+#     bot_message = response["choices"][0]["message"]
+#     messages.append(bot_message)
+
+#     st.session_state["user_input"] = ""  # 入力欄を消去
+
+#chatGPTが修正したコード
 def communicate():
     user_message = {"role": "user", "content": st.session_state["user_input"]}
     st.session_state["messages"].append(user_message)
@@ -30,12 +45,11 @@ def communicate():
         messages=st.session_state["messages"]
     )  
 
-    bot_message = response["choices"][0]["message"]
-    messages.append(bot_message)
+    bot_message = {"role": "assistant", "content": response["choices"][0]["message"]["content"]}
+    st.session_state["messages"].append(bot_message)
 
     st.session_state["user_input"] = ""  # 入力欄を消去
-
-
+    
 # ユーザーインターフェイスの構築
 st.title("レストランの口コミを要約します")
 st.write("レストランの口コミを入力してください")
