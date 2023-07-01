@@ -6,15 +6,12 @@ openai.api_key = st.secrets.OpenAIAPI.openai_api_key
 
 system_prompt = """
 このスレッドでは以下ルールを厳格に守ってください。
-あなたはレストランの評判情報から以下の５点を整理して回答するシステムです。
+あなたはレストランの評判情報から以下を整理して回答するシステムです。
 ・レストランの概要
 ・レストランの雰囲気
 ・人気メニュー
 ・接客態度
 ・ペット店内可否
-
-レストランの評判情報は複数の人が記載したものを「改行」でつないで入力します。
-
 """
 
 
@@ -43,16 +40,17 @@ def communicate():
 # ユーザーインターフェイスの構築
 st.title("レストランの口コミを要約します")
 st.write("レストランの口コミを入力してください")
-st.write("概要、雰囲気、人気メニュー、接客態度、ペット店内可否の５つの観点で整理します")
+st.write("概要、雰囲気、人気メニュー、接客態度の４つの観点で整理します。また観点を１つ追加することもできます。")
+
+# ユーザーからの観点指定入力
+aspect_input = st.text_input("追加したい観点（例：ペット可否）", key="aspect_input")
 
 # ユーザーからの口コミ入力
 review_input = st.text_area("レストランの口コミ", key="review_input")
 
-# ユーザーからの観点指定入力
-aspect_input = st.text_input("要約の観点を指定してください（例：概要、雰囲気、人気メニュー、接客態度、ペット店内可否）", key="aspect_input")
-
-# 口コミと観点を結合して全体のユーザー入力を作成
-st.session_state["user_input"] = f"{review_input}\n{aspect_input}"
+# 追加観点のプロンプトに追加
+#st.session_state["user_input"] = f"{review_input}\n{aspect_input}"
+system_prompt_added = "\n・".join([system_prompt, aspect_input])
 
 if st.button("Submit"):
     communicate()
