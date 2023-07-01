@@ -19,21 +19,21 @@ system_prompt = """
 
 
 # st.session_stateを使いメッセージのやりとりを保存
-# if "messages" not in st.session_state:
-#     st.session_state["messages"] = [
-#         {"role": "system", "content": system_prompt}
-#         ]
+if "messages" not in st.session_state:
+    st.session_state["messages"] = [
+        {"role": "system", "content": system_prompt}
+        ]
 
 # チャットボットとやりとりする関数
 def communicate():
 #    messages = st.session_state["messages"]
-
-    st.session_state["messages"] = [
-      {"role": "system", "content": system_prompt}
-      ]
+    
+    # st.session_state["messages"] = [
+    #   {"role": "system", "content": system_prompt}
+    #   ]
     
     user_message = {"role": "user", "content": st.session_state["user_input"]}
-    messages.append(user_message)
+    st.session_state["messages"].append(user_message)
 
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
