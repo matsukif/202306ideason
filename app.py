@@ -59,6 +59,9 @@ st.write("また観点を１つ追加することもできます。")
 # ユーザーからの観点指定入力
 aspect_input = st.text_input("追加したい観点（例：ペット可否）", key="aspect_input")
 
+if "user_input" not in st.session_state:
+    st.session_state["user_input"] = ""
+    
 # ユーザーからの口コミ入力
 review_input = st.text_area("レストランの口コミ", key="user_input")
     
