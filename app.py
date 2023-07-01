@@ -40,18 +40,23 @@ def communicate():
 # ユーザーインターフェイスの構築
 st.title("レストランの口コミを要約します")
 st.write("レストランの口コミを入力してください")
-st.write("概要、雰囲気、人気メニュー、接客態度の４つの観点で整理します。また観点を１つ追加することもできます。")
+st.write("概要、雰囲気、人気メニュー、接客態度の４つの観点で整理します。")
+st.write("また観点を１つ追加することもできます。")
 
 # ユーザーからの観点指定入力
 aspect_input = st.text_input("追加したい観点（例：ペット可否）", key="aspect_input")
 
 # ユーザーからの口コミ入力
-review_input = st.text_area("レストランの口コミ", key="review_input")
+review_input = st.text_area("レストランの口コミ", key="user_input")
 
 # 追加観点のプロンプトに追加
 #st.session_state["user_input"] = f"{review_input}\n{aspect_input}"
-system_prompt_added = "\n・".join([system_prompt, aspect_input])
-
+if aspect_input != "":
+    system_prompt_added = "\n・".join([system_prompt, aspect_input])
+    st.session_state["messages"] = [
+        {"role": "system", "content": system_prompt_added}
+        ]
+    
 if st.button("Submit"):
     communicate()
 
