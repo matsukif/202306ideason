@@ -60,7 +60,7 @@ st.write("また観点を１つ追加することもできます。")
 aspect_input = st.text_input("追加したい観点（例：ペット可否）", key="aspect_input")
 
 # ユーザーからの口コミ入力
-review_input = st.text_area("レストランの口コミ", key="user_input")
+user_input = st.text_area("レストランの口コミ", key="user_input")
 
 # 追加観点のプロンプトに追加
 #st.session_state["user_input"] = f"{review_input}\n{aspect_input}"
