@@ -26,45 +26,35 @@ if "messages" not in st.session_state:
 
 # チャットボットとやりとりする関数
 def communicate():
-#    messages = st.session_state["messages"]
-    
-    st.session_state["messages"] = [
-      {"role": "system", "content": system_prompt}
-      ]
-
-    messages = st.session_state["messages"]
-    
     user_message = {"role": "user", "content": st.session_state["user_input"]}
     st.session_state["messages"].append(user_message)
 
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
-        messages=messages
+        messages=st.session_state["messages"]
     )  
 
-    bot_message = response["choices"][0]["message"]
-    messages.append(bot_message)
+    bot_message = {"role": "assistant", "content": response["choices"][0]["message"]["content"]}
+    st.session_state["messages"].append(bot_message)
 
     st.session_state["user_input"] = ""  # 入力欄を消去
 
 
 # ユーザーインターフェイスの構築
 st.title("レストランの口コミを要約します")
-#st.image("bom_v2.1.png")
 st.write("レストランの口コミを入力してください")
 st.write("概要、雰囲気、人気メニュー、接客態度、ペット店内可否の５つの観点で整理します")
-# st.write("例：Toyosu Building, 3-3-3 Toyosu, Koto-ku, Tokyo, Japan")
 
-user_input = st.text_input("レストランの口コミ", key="user_input", on_change=communicate)
+# ユーザーからの各観点の入力
+overview = st.text_input("レストランの概要", key="overview")
+atmosphere = st.text_input("レストランの雰囲気", key="atmosphere")
+popular_menu = st.text_input("人気メニュー", key="popular_menu")
+customer_service = st.text_input("接客態度", key="customer_service")
+pet_friendly = st.text_input("ペット店内可否", key="pet_friendly")
+
+# 観点を結合して全体のユーザー入力を作成
+st.session_state["user_input"] = f"{overview}\n{atmosphere}\n{popular_menu}\n{customer_service}\n{pet_friendly}"
+communicate()
 
 if st.session_state["messages"]:
-    messages = st.session_state["messages"]
-
-    for message in reversed(messages[1:]):  # 直近のメッセージを上に
-        speaker = "＜口コミ情報＞"
-        if message["role"]=="assistant":
-            speaker="＜要約結果＞"
-
-        # st.write(speaker + ": " + message["content"])
-        st.write(speaker)
-        st.write(message["content"])
+    messages = st.session_state
