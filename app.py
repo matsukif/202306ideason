@@ -95,7 +95,7 @@ if st.session_state["messages"]:
             speaker="＜要約結果＞"
 
         # st.write(speaker + ": " + message["content"])
-        if speaker == "＜口コミ情報＞":
-            st.write("-----------------------------------------------------------------------------------------------")
+#        if speaker == "＜口コミ情報＞":
+        st.write("-----------------------------------------------------------------------------------------------")
         st.write(speaker)
         st.write(message["content"])
