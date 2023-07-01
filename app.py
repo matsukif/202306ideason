@@ -65,4 +65,6 @@ if st.session_state["messages"]:
         if message["role"]=="assistant":
             speaker="＜＜要約結果＞＞"
 
-        st.write(speaker + ":\n" + message["content"])
+        # st.write(speaker + ": " + message["content"])
+        st.write(speaker)
+        st.write(message["content"])
