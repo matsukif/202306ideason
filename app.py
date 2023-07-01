@@ -61,7 +61,6 @@ aspect_input = st.text_input("追加したい観点（例：ペット可否）",
 
 # ユーザーからの口コミ入力
 review_input = st.text_area("レストランの口コミ", key="user_input")
-
     
 if st.button("要約開始"):
     # 追加観点のプロンプトに追加
@@ -71,8 +70,8 @@ if st.button("要約開始"):
             {"role": "system", "content": system_prompt_added}
             ]
     
-    #st.session_state["user_input"] = review_input  # 追加する行
-    st.session_state["user_input"] = st.text_area("レストランの口コミ", key="user_input")  # ここに移動
+    st.session_state["user_input"] = review_input  # 追加する行
+    #st.session_state["user_input"] = st.text_area("レストランの口コミ", key="user_input")  # ここに移動
     
     communicate()
 
