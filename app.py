@@ -31,6 +31,8 @@ def communicate():
     st.session_state["messages"] = [
       {"role": "system", "content": system_prompt}
       ]
+
+    messages = st.session_state["messages"]
     
     user_message = {"role": "user", "content": st.session_state["user_input"]}
     st.session_state["messages"].append(user_message)
@@ -47,7 +49,7 @@ def communicate():
 
 
 # ユーザーインターフェイスの構築
-st.title("レストランの口コミを要約します。")
+st.title("レストランの口コミを要約します")
 #st.image("bom_v2.1.png")
 st.write("レストランの口コミを入力してください")
 st.write("概要、雰囲気、人気メニュー、接客態度、ペット店内可否の５つの観点で整理します")
