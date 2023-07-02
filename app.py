@@ -32,7 +32,8 @@ system_prompt_2 = """
 【レストランの雰囲気】
 　・（ここに整理した結果を記入）
 　・
- 
+
+ 箇条書きは改行してください。
 """
 
 system_prompt = "".join([system_prompt_1, system_prompt_2])
