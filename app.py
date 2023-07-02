@@ -23,6 +23,8 @@ system_prompt_1 = """
 """
 
 system_prompt_2 = """
+
+
 """
 
 system_prompt = "".join([system_prompt_1, system_prompt_2])
@@ -45,12 +47,19 @@ def communicate():
         ]
 
     #追加観点のプロンプトに追加
+    # if aspect_input != "":
+    #     system_prompt_added = "\n・".join([system_prompt, aspect_input])
+    #     st.session_state["messages"] = [
+    #         {"role": "system", "content": system_prompt_added}
+    #         ]
+    
     if aspect_input != "":
-        system_prompt_added = "\n・".join([system_prompt, aspect_input])
+        system_prompt_1_added = "\n・".join([system_prompt, aspect_input])
+        system_prompt_added = "".join([system_prompt_1_added, system_prompt_2])
         st.session_state["messages"] = [
             {"role": "system", "content": system_prompt_added}
             ]
-    
+
     messages = st.session_state["messages"]
     
     user_message = {"role": "user", "content": st.session_state["user_input"]}
