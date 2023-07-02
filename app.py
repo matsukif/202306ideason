@@ -4,7 +4,16 @@ import openai
 # Streamlit Community Cloudの「Secrets」からOpenAI API keyを取得
 openai.api_key = st.secrets.OpenAIAPI.openai_api_key
 
-system_prompt = """
+# system_prompt = """
+# このスレッドでは以下ルールを厳格に守ってください。
+# あなたはレストランの評判情報から以下を整理して回答するシステムです。
+# ・レストランの概要
+# ・レストランの雰囲気
+# ・人気メニュー
+# ・接客態度
+# """
+
+system_prompt_1 = """
 このスレッドでは以下ルールを厳格に守ってください。
 あなたはレストランの評判情報から以下を整理して回答するシステムです。
 ・レストランの概要
@@ -13,6 +22,10 @@ system_prompt = """
 ・接客態度
 """
 
+system_prompt_2 = """
+"""
+
+system_prompt = "".join([system_prompt_1, system_prompt_2])
 
 # # st.session_stateを使いメッセージのやりとりを保存
 # if "messages" not in st.session_state:
