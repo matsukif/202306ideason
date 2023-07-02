@@ -24,7 +24,15 @@ system_prompt_1 = """
 
 system_prompt_2 = """
 
+回答は以下のフォーマットで箇条書きにしてください。
+【レストランの概要】
+　・（ここに整理した結果を記入）
+　・
 
+【レストランの雰囲気】
+　・（ここに整理した結果を記入）
+　・
+ 
 """
 
 system_prompt = "".join([system_prompt_1, system_prompt_2])
