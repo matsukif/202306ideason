@@ -63,7 +63,7 @@ def communicate():
     #         ]
     
     if aspect_input != "":
-        system_prompt_1_added = "\n・".join([system_prompt, aspect_input])
+        system_prompt_1_added = "\n・".join([system_prompt_1, aspect_input])
         system_prompt_added = "".join([system_prompt_1_added, system_prompt_2])
         st.session_state["messages"] = [
             {"role": "system", "content": system_prompt_added}
