@@ -4,15 +4,6 @@ import openai
 # Streamlit Community Cloudの「Secrets」からOpenAI API keyを取得
 openai.api_key = st.secrets.OpenAIAPI.openai_api_key
 
-# system_prompt = """
-# このスレッドでは以下ルールを厳格に守ってください。
-# あなたはレストランの評判情報から以下を整理して回答するシステムです。
-# ・レストランの概要
-# ・レストランの雰囲気
-# ・人気メニュー
-# ・接客態度
-# """
-
 system_prompt_1 = """
 このスレッドでは以下ルールを厳格に守ってください。
 あなたはレストランの評判情報から以下を整理して回答するシステムです。
@@ -34,10 +25,6 @@ system_prompt_2 = """
 system_prompt = "".join([system_prompt_1, system_prompt_2])
 
 # # st.session_stateを使いメッセージのやりとりを保存
-# if "messages" not in st.session_state:
-#     st.session_state["messages"] = [
-#         {"role": "system", "content": system_prompt}
-#         ]
 
 st.session_state["messages"] = [
     {"role": "system", "content": system_prompt}
@@ -51,11 +38,6 @@ def communicate():
         ]
 
     #追加観点のプロンプトに追加
-    # if aspect_input != "":
-    #     system_prompt_added = "\n・".join([system_prompt, aspect_input])
-    #     st.session_state["messages"] = [
-    #         {"role": "system", "content": system_prompt_added}
-    #         ]
     
     if aspect_input != "":
         system_prompt_1_added = "\n・".join([system_prompt_1, aspect_input])
@@ -79,21 +61,6 @@ def communicate():
 
     st.session_state["user_input"] = ""  # 入力欄を消去
 
-#chatGPTが修正したコード
-# def communicate():
-#     user_message = {"role": "user", "content": st.session_state["user_input"]}
-#     st.session_state["messages"].append(user_message)
-
-#     response = openai.ChatCompletion.create(
-#         model="gpt-3.5-turbo",
-#         messages=st.session_state["messages"]
-#     )  
-
-#     bot_message = {"role": "assistant", "content": response["choices"][0]["message"]["content"]}
-#     st.session_state["messages"].append(bot_message)
-
-#     st.session_state["user_input"] = ""  # 入力欄を消去
-    
 # ユーザーインターフェイスの構築
 st.title("レストランの口コミを要約します")
 st.write("レストランの口コミを入力してください")
@@ -125,7 +92,6 @@ if st.session_state["messages"]:
             speaker="＜要約結果＞"
 
         # st.write(speaker + ": " + message["content"])
-#        if speaker == "＜口コミ情報＞":
         st.write("-----------------------------------------------------------------------------------------------")
         st.write(speaker)
         st.write(message["content"])
